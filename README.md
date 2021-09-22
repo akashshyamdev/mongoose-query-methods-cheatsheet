@@ -1,5 +1,5 @@
 # Cheatsheet for Mongoose Query Methods
-A cheatsheet of 100+ methods you can use to implement common patterns in mongoose data-fetching(eg pagination).
+A cheatsheet of methods you can use to implement common patterns in mongoose data-fetching(eg pagination, filtering etc).
 
 ### Base Example
 We'll work with a couple of queries which have not been resolved.
