@@ -15,21 +15,51 @@ Using the `where()` method in conjugation with some other methods, based on valu
 
 The following methods are usually used with the `where()` method:
 
-* `equals()`
-* `gt()`
-* `lt()`
-* `gte()`
-* `lte()`
-
+* `equals()` - equal to
 ```javascript
-// Filter By Equal
-userQuery.where('age').equals(13);
-
-// Filter By Greater Than
-userQuery.where('age').gte('18')
-
-// Filter By Less Than
-userQuery.where('age').lte('18');
+userQuery.where('age').equals(13); // results where user age is 18
+```
+* `gt()` - greater than
+```javascript
+userQuery.where('age').equals(13); // results where user age is more than 18
+```
+* `lt()` - less than
+```javascript
+userQuery.where('age').equals(13); // results where user age is less than 18
+```
+* `gte()` - greater than or equal to
+```javascript
+userQuery.where('age').gte(13); // results where user age is greater than or equal to 18
+```
+* `lte()` - less than or equal to
+```javascript
+userQuery.where('age').lte(18); // results where user age is less than or equal to 18
+```
+* `mod()` - reminder
+```javascript
+userQuery.where('age').mod([2, 1]); // all users where add is odd
+```
+* `ne()` - not equal to
+```javascript
+userQuery.where('age').ne(13); // results where age is not 13
+```
+* `size()` - size of array
+```javascript
+userQuery.where('projects').size(); // 3
+```
+* `regex()` - use regex
+```javascript
+userQuery.where('name').regex(/abc/i); // results where the name matches the pattern
+```
+* `slice()` - JavaScript slice on the array of results
+```javascript
+// projects is an array
+userQuery.where('projects').slice(2); // results after doing the slice on each result
+```  
+* `all()` - all elements in the argument array is present
+```javascript
+// projects is an array
+userQuery.where('projects').all(['p1', 'p2', 'p3']); // results where the field has all the specified elements 
 ```
 
 ###Sorting
@@ -90,6 +120,14 @@ todosQuery.skip((page - 1) * number).limit(page * 10);
 ```
 
 ###Performance
+####explain()
+This method returns execution stats instead of the data. 
+It can be useful when comparing different approaches and analyzing which one is more performative.
+
+```javascript
+const stats = await todosQuery.explain();
+```
+
 ####lean()
 Lean removes all the `getters`, `setters` and the `virtuals` from the document that is returned by mongoose.
  The object returned is a plain JavaScript object and not a mongoose query compared to other query methods.
