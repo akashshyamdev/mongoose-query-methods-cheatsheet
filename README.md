@@ -10,7 +10,7 @@ const todosQuery = Todo.find({});
 const userQuery = User.find({});
 ```
 
-###Filtering By Value
+### Filtering By Value
 Using the `where()` method in conjugation with some other methods, based on value we can filter out certain results.
 
 The following methods are usually used with the `where()` method:
