@@ -63,7 +63,7 @@ userQuery.where('projects').all(['p1', 'p2', 'p3']); // results where the field 
 ```
 
 ### Sorting
-####sort()
+#### sort()
 The field name is the key, and the value states whether it's ascending or descending. There are different ways to implement this:
 ```javascript
 // -1 or 1
@@ -82,18 +82,18 @@ todosQuery.sort('title -description');
 ### Pagination
 We can use a combination of `limit` and `skip` to implement pagination easily.
 Before that, let's look at how these two methods work.
-####limit()
+#### limit()
 ```javascript
 todosQuery.limit(100);
 ```
 
-####skip()
+#### skip()
 This will skip the first `x` results of the `find` query.
 ```javascript
 todosQuery.skip(20);
 ```
 
-####Combining To Implement Pagination
+#### Combining To Implement Pagination
 Let's say that we are on page `2` and each page contains 10 results.
 We'll create a variable called `page` which is `2` and `number` which is `10`.
 
@@ -120,7 +120,7 @@ todosQuery.skip((page - 1) * number).limit(page * 10);
 ```
 
 ### Performance
-####explain()
+#### explain()
 This method returns execution stats instead of the data. 
 It can be useful when comparing different approaches and analyzing which one is more performative.
 
@@ -128,7 +128,7 @@ It can be useful when comparing different approaches and analyzing which one is 
 const stats = await todosQuery.explain();
 ```
 
-####lean()
+#### lean()
 Lean removes all the `getters`, `setters` and the `virtuals` from the document that is returned by mongoose.
  The object returned is a plain JavaScript object and not a mongoose query compared to other query methods.
 
@@ -140,7 +140,7 @@ const user = await userQuery.lean();
 > It's like calling the `exec()` method.</i>
 
 <br>
-####cursor()
+#### cursor()
 Cursors are the native way mongodb navigates through the database.
 With mongoose, an array is returned as a result of `find()` but the native driver returns a `Cursor`.
 
