@@ -62,7 +62,7 @@ userQuery.where('projects').slice(2); // results after doing the slice on each r
 userQuery.where('projects').all(['p1', 'p2', 'p3']); // results where the field has all the specified elements 
 ```
 
-###Sorting
+### Sorting
 ####sort()
 The field name is the key, and the value states whether it's ascending or descending. There are different ways to implement this:
 ```javascript
@@ -79,7 +79,7 @@ todosQuery.sort({ title: 'desc', description: 'asc' });
 todosQuery.sort('title -description');
 ```
 
-###Pagination
+### Pagination
 We can use a combination of `limit` and `skip` to implement pagination easily.
 Before that, let's look at how these two methods work.
 ####limit()
@@ -119,7 +119,7 @@ const number = 10;
 todosQuery.skip((page - 1) * number).limit(page * 10);
 ```
 
-###Performance
+### Performance
 ####explain()
 This method returns execution stats instead of the data. 
 It can be useful when comparing different approaches and analyzing which one is more performative.
