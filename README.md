@@ -32,38 +32,6 @@ userQuery.where('age').gte('18')
 userQuery.where('age').lte('18');
 ```
 
-
-###Performance
-####cursor()
-Cursors are the native way mongodb navigates through the database.
-With mongoose, an array is returned as a result of `find()` but the native driver returns a `Cursor`.
-
-Mongoose allows us to get the data in the form a cursor/stream because it may be more performant in some cases.
-
-```javascript
-// There are 2 ways to use a cursor. First, as a stream:
-Thing.
-  find({ name: /^hello/ }).
-  cursor().
-  on('data', function(doc) { console.log(doc); }).
-  on('end', function() { console.log('Done!'); });
-
-// Or you can use `.next()` to manually get the next doc in the stream.
-// `.next()` returns a promise, so you can use promises or callbacks.
-const cursor = Thing.find({ name: /^hello/ }).cursor();
-cursor.next(function(error, doc) {
-  console.log(doc);
-});
-
-// Because `.next()` returns a promise, you can use co
-// to easily iterate through all documents without loading them
-// all into memory.
-const cursor = Thing.find({ name: /^hello/ }).cursor();
-for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
-  console.log(doc);
-}
-```
-
 ###Sorting
 ####sort()
 The field name is the key, and the value states whether it's ascending or descending. There are different ways to implement this:
@@ -119,4 +87,47 @@ const number = 10;
 // limit = 2 * 10 = first 20 results
 // the results are limited to the first 11 to 20 results
 todosQuery.skip((page - 1) * number).limit(page * 10);
+```
+
+###Performance
+####lean()
+Lean removes all the `getters`, `setters` and the `virtuals` from the document that is returned by mongoose.
+ The object returned is a plain JavaScript object and not a mongoose query compared to other query methods.
+
+```javascript
+const user = await userQuery.lean();
+```
+
+><i>Chaining further query methods will not work as the mongoose query is not returned, the result is. 
+> It's like calling the `exec()` method.</i>
+
+<br>
+####cursor()
+Cursors are the native way mongodb navigates through the database.
+With mongoose, an array is returned as a result of `find()` but the native driver returns a `Cursor`.
+
+Mongoose allows us to get the data in the form a cursor/stream because it may be more performant in some cases.
+
+```javascript
+// There are 2 ways to use a cursor. First, as a stream:
+Thing.
+  find({ name: /^hello/ }).
+  cursor().
+  on('data', function(doc) { console.log(doc); }).
+  on('end', function() { console.log('Done!'); });
+
+// Or you can use `.next()` to manually get the next doc in the stream.
+// `.next()` returns a promise, so you can use promises or callbacks.
+const cursor = Thing.find({ name: /^hello/ }).cursor();
+cursor.next(function(error, doc) {
+  console.log(doc);
+});
+
+// Because `.next()` returns a promise, you can use co
+// to easily iterate through all documents without loading them
+// all into memory.
+const cursor = Thing.find({ name: /^hello/ }).cursor();
+for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
+  console.log(doc);
+}
 ```
