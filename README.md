@@ -21,19 +21,19 @@ The following methods are usually used with the `where()` method:
 
 * `equals()` - equal to
 ```javascript
-userQuery.where('age').equals(13); // results where user age is 18
+userQuery.where('age').equals(18); // results where user age is 18
 ```
 * `gt()` - greater than
 ```javascript
-userQuery.where('age').equals(13); // results where user age is more than 18
+userQuery.where('age').gt(18); // results where user age is more than 18
 ```
 * `lt()` - less than
 ```javascript
-userQuery.where('age').equals(13); // results where user age is less than 18
+userQuery.where('age').lt(18); // results where user age is less than 18
 ```
 * `gte()` - greater than or equal to
 ```javascript
-userQuery.where('age').gte(13); // results where user age is greater than or equal to 18
+userQuery.where('age').gte(18); // results where user age is greater than or equal to 18
 ```
 * `lte()` - less than or equal to
 ```javascript
@@ -41,7 +41,7 @@ userQuery.where('age').lte(18); // results where user age is less than or equal 
 ```
 * `mod()` - reminder
 ```javascript
-userQuery.where('age').mod([2, 1]); // all users where add is odd
+userQuery.where('age').mod([2, 1]); // all users where age is odd
 ```
 * `ne()` - not equal to
 ```javascript
